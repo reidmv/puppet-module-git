@@ -8,8 +8,13 @@
 # Sample Usage:
 #  class { 'git': }
 #
-class git {
-  package { 'git-core':
-    ensure => installed,
+class git (
+  $ensure  = installed,
+  $package = $git::params::package,
+) inherits git::params {
+
+  package { $package:
+    ensure => $ensure,
   }
+
 }
